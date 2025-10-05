@@ -1,4 +1,6 @@
+# Evitar subir archivos innecesarios o sensibles
 .env
+venv/
 __pycache__/
 *.pkl
 *.log
