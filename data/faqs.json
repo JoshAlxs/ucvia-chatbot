@@ -1,0 +1,53 @@
+[
+{
+    "pregunta": "¿Dónde pido mi constancia de estudios?",
+    "respuesta": "La constancia de estudios se solicita en Secretaría Académica. Debes llenar el formulario correspondiente, presentar tu DNI y realizar el pago por derecho de trámite en caja.",
+    "categoria": "tramites"
+},
+{
+    "pregunta": "¿Cómo me inscribo en un curso fuera de mi plan de estudios?",
+    "respuesta": "Debes presentar una solicitud en el área de Registro Académico, adjuntar la autorización de tu coordinador de carrera y pagar el derecho de trámite. La inscripción está sujeta a aprobación de la Facultad.",
+    "categoria": "matricula"
+},
+{
+    "pregunta": "¿Qué requisitos hay para la beca de investigación?",
+    "respuesta": "Debes tener un promedio ponderado mayor o igual a 14, presentar una carta de motivación, una propuesta de proyecto avalada por un docente y no haber desaprobado cursos en el último ciclo.",
+    "categoria": "becas"
+},
+{
+    "pregunta": "¿Cómo solicito una reserva de matrícula?",
+    "respuesta": "La reserva de matrícula se solicita en la Oficina de Registro Académico antes del inicio del ciclo. Debes presentar una carta de motivos y pagar el derecho correspondiente.",
+    "categoria": "matricula"
+},
+{
+    "pregunta": "¿Dónde consulto mi horario de clases?",
+    "respuesta": "El horario de clases está disponible en la Intranet de la Universidad, en la sección de Estudiante → Matrícula → Horario.",
+    "categoria": "academico"
+},
+{
+    "pregunta": "¿Cómo tramito mi carné universitario?",
+    "respuesta": "El carné universitario se tramita en la Oficina de Bienestar Universitario. Debes llevar tu foto tamaño carné, copia del DNI y constancia de matrícula vigente.",
+    "categoria": "tramites"
+},
+{
+    "pregunta": "¿Qué servicios ofrece la biblioteca universitaria?",
+    "respuesta": "La biblioteca ofrece préstamo de libros, acceso a bases de datos digitales, salas de estudio grupal e individual, además de capacitaciones en uso de recursos académicos.",
+    "categoria": "academico"
+},
+{
+    "pregunta": "¿Qué debo hacer si desapruebo una asignatura?",
+    "respuesta": "Si desapruebas un curso, debes matricularte nuevamente en el siguiente ciclo en que se ofrezca. Si lo desapruebas dos veces, necesitas autorización especial de tu Facultad.",
+    "categoria": "academico"
+},
+{
+    "pregunta": "¿Qué requisitos necesito para realizar prácticas preprofesionales?",
+    "respuesta": "Debes tener como mínimo el 70% de créditos aprobados, estar matriculado en el ciclo actual y presentar una carta de aceptación de la empresa donde realizarás las prácticas.",
+    "categoria": "practicas"
+},
+{
+    "pregunta": "¿Qué actividades extracurriculares ofrece la universidad?",
+    "respuesta": "La universidad ofrece talleres de deporte, arte, música, danza, voluntariado y grupos de investigación estudiantil. Puedes inscribirte a través de la Oficina de Bienestar Universitario.",
+    "categoria": "vida_universitaria"
+}
+]
+
