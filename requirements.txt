@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-google-generativea
-faiss-cpu
+google-generativeai
 python-dotenv
 jinja2
