@@ -3,7 +3,7 @@ import os
 import json
 import pickle
 from dotenv import load_dotenv
-import google.generativeai as genai
+from openai import OpenAI
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sentence_transformers import SentenceTransformer
@@ -11,18 +11,17 @@ import faiss
 import numpy as np
 
 # ---------------- CONFIGURACIÓN ----------------
-load_dotenv()  # Carga variables desde .env (local)
-API_KEY = os.getenv("GOOGLE_API_KEY")
+load_dotenv()  # Carga variables desde .env o desde Render
+API_KEY = os.getenv("OPENAI_API_KEY")
 
 if not API_KEY:
-    raise RuntimeError("❌ Falta definir GOOGLE_API_KEY en Render o .env")
+    raise RuntimeError("❌ Falta definir OPENAI_API_KEY en Render o en el archivo .env")
 
-genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-2.0-flash")
+client = OpenAI(api_key=API_KEY)
 
 SYSTEM_PROMPT = (
     "Eres UCVia, guía universitario digital. "
-    "Responde breve, clara y profesionalmente. "
+    "Responde de forma breve, clara y profesional. "
     "Si no sabes la respuesta, indícalo y sugiere una fuente confiable."
 )
 
@@ -68,7 +67,7 @@ def retrieve(query, k=1):
 
 def responder(pregunta: str) -> str:
     """
-    Procesa una pregunta del usuario y genera una respuesta usando Gemini.
+    Procesa una pregunta del usuario y genera una respuesta usando OpenAI GPT-4o.
     """
     try:
         # Clasificación y recuperación contextual
@@ -85,8 +84,18 @@ Pregunta del estudiante: {pregunta}
 
 Respuesta:"""
 
-        respuesta = model.generate_content(prompt)
-        return respuesta.text.strip()
+        # Llamada a OpenAI
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini",  # puedes cambiar a "gpt-4o" si tienes acceso
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=300,
+        )
+
+        return completion.choices[0].message.content.strip()
 
     except Exception as e:
         return f"⚠️ Error al generar respuesta: {str(e)}"
