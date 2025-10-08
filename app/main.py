@@ -2,10 +2,11 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-import google.generativeai as genai
+from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
+# 🔹 Cargar variables de entorno (.env en local; Render usa su Environment)
 load_dotenv()
 
 app = FastAPI()
@@ -15,6 +16,9 @@ templates = Jinja2Templates(directory="app/templates")
 
 # 📂 Servir archivos estáticos (CSS, JS, imágenes, etc.)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+# 🔹 Inicializar cliente OpenAI (usa la variable del Dashboard de Render)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # 🔹 Ruta de prueba
 @app.get("/test")
@@ -26,13 +30,19 @@ def test():
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-# 🔹 Ruta de chat (comunicación con la IA)
+# 🔹 Ruta del chat (comunicación con la IA)
 @app.post("/chat")
 def chat(message: str = Form(...)):
-    api_key = os.getenv("GOOGLE_API_KEY")
-    genai.configure(api_key=api_key)
-    
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(message)
+    try:
+        # Usa modelo liviano y rápido (puedes cambiar a gpt-4o)
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": message}],
+            max_tokens=512
+        )
 
-    return JSONResponse({"response": response.text})
+        respuesta = completion.choices[0].message.content.strip()
+        return JSONResponse({"response": respuesta})
+
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
